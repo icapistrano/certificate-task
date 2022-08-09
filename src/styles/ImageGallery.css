@@ -1,0 +1,21 @@
+.fit-img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.img-text-container {
+  list-style-type: none;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
+
+.img-text-container li:first-child{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.img-text-container:not(:first-child){
+  font-size: 20px;
+}
