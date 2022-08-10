@@ -12,6 +12,8 @@ export const CertificateForm = ({showFormPopup, setShowFormPopup, submitCertific
   const [validated, setValidated] = useState(false);
 
   const [imageUrl, setImageUrl] = useState('');
+  const [resizedImgUrl, setResizedImgUrl] = useState('');
+
   const [artworkName, setArtworkName] = useState('');
   const [artistName, setArtistName] = useState('');
   const [productionYear, setProductionYear] = useState('');
@@ -89,14 +91,14 @@ export const CertificateForm = ({showFormPopup, setShowFormPopup, submitCertific
   const handleSubmit = () => {
     setValidated(true);
 
-    for (let state of [imageUrl, artworkName, artistName]) {
+    for (let state of [resizedImgUrl, artworkName, artistName]) {
       if (!validTextInput(state)) return;
     }
 
     if (!validDateYearInput(productionYear)) return;
 
     submitCertificateCb({
-      "image":imageUrl,
+      "image":resizedImgUrl,
       "artwork":artworkName,
       "artist":artistName,
       "year":productionYear
@@ -118,14 +120,14 @@ export const CertificateForm = ({showFormPopup, setShowFormPopup, submitCertific
       title={"File Upload"}
       content={
         <Form>
-          <FormCanvas imageSrc={imageUrl}></FormCanvas>
+          <FormCanvas imageSrc={imageUrl} setResizeImgCb={setResizedImgUrl}></FormCanvas>
 
           <FormInput
             type="file"
             label={"Select Image"}
             formValidated={validated}
             setState={setImageUrlWrapper}
-            validInputCheckCb={() => validTextInput(imageUrl)}>
+            validInputCheckCb={() => validTextInput(resizedImgUrl)}>
           </FormInput>
 
           <FormInput

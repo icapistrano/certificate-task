@@ -24,13 +24,13 @@ export const ImageGallery = ({data, maxContent=[1,2,3,4], sortFilter, deleteCert
   }
 
   function sortByDate() {
-    return Object.values(data).sort((a, b) => {
+    return data.sort((a, b) => {
       return parseInt(a.year) - parseInt(b.year);
     });
   }
 
   function sortByName() {
-    return Object.values(data).sort((a, b) => {
+    return data.sort((a, b) => {
       if (a.artist.toUpperCase() < b.artist.toUpperCase()) return -1; 
       if (a.artist.toUpperCase() > b.artist.toUpperCase()) return 1; 
       return 0;
@@ -43,7 +43,7 @@ export const ImageGallery = ({data, maxContent=[1,2,3,4], sortFilter, deleteCert
   } 
 
   const deleteCertificateWrapper = (certificate) => {
-    deleteCertificateCb(certificate);
+    deleteCertificateCb(certificate.artwork);
     setShowImagePopup(false);
   }
 
@@ -74,17 +74,11 @@ export const ImageGallery = ({data, maxContent=[1,2,3,4], sortFilter, deleteCert
         content={
           popupImgData !== null &&
             <div>
-              <Image imgSrc={popupImgData.image}styling="mb-2"></Image>
+              <Image imgSrc={popupImgData.image} styling="mb-2"></Image>
               <ul className='img-text-container px-2'>
-                {
-                  Object.keys(popupImgData)
-                  .filter(key => key !== "image")
-                  .map(key => 
-                      <li key={key} className="mb-1">
-                        {popupImgData[key]}
-                      </li>
-                    )
-                }
+                <li className="mb-1">{popupImgData.artwork}</li>
+                <li className="mb-1">{popupImgData.artist}</li>
+                <li className="mb-1">{popupImgData.year}</li>
               </ul>
             </div>
         }

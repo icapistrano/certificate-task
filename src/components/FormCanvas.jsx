@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 
-export const FormCanvas = ({imageSrc}) => {
+export const FormCanvas = ({imageSrc, setResizeImgCb}) => {
   const canvasRef = useRef();
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export const FormCanvas = ({imageSrc}) => {
       canvas.height = image.height ;
       
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      setResizeImgCb(canvas.toDataURL());
     }
 
     image.src = imageSrc;
